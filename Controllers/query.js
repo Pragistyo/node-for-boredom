@@ -10,7 +10,8 @@ exports.insertInpatiens = (param)=>{
 }
 
 exports.updateInpatient = (param)=>{
-    `UPDATE inpatient
+    return`
+    UPDATE inpatient
     SET firstname = ${param.firstname} ,
         middlename = ${param.middlename} ,
         lastname = ${param.lastname} ,
