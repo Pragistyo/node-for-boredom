@@ -22,7 +22,7 @@ Body for POST
 (Create one Inpatient data) end Point has to be as example of JSON equivalent below:
 ```yaml
 {
-        firstname:`Budi`,
+        firstname: 'Budi',
         middlename: 'Agung',
         lastname: 'Saleh',
         mobilenumber: '081298782733',
@@ -52,7 +52,7 @@ Body for POST
 Body for POST (Create one doctor data) end Point has to be as example of JSON equivalent below:
 ```yaml
         {
-            firstname:`Ahmad`,
+            firstname: 'Ahmad',
             middlename: 'Subekni',
             lastname: 'Dwiantara',
             mobilenumber: '081189472745',
@@ -86,13 +86,13 @@ Body for POST :
 (Create one medicalrecord data) end Point has to be as example of JSON equivalent below:
 ```yaml
 {
-    inpatient_id : 4
-    doctor_id : 1
-    consultdate : '2020-01-07'
-    bloodpressure : '95'
-    bpmnumber : '90'
-    pupil : 'normal'
-    temperature : '36.80'
+    inpatient_id : 4,
+    doctor_id : 1,
+    consultdate : '2020-01-07',
+    bloodpressure : '95',
+    bpmnumber : '90',
+    pupil : 'normal',
+    temperature : '36.80',
     polyclinic : 'GI'
 }
 ```
@@ -100,8 +100,8 @@ Body for POST :
 To Get Data by interval Date and/or selected polyclinic 
 ```yaml
 {
-    dateFrom: '2018-01-01'
-    dateTo: '2020-06-29'
+    dateFrom: '2018-01-01',
+    dateTo: '2020-06-29',
     polyclinic: 'GI'
 }
 ```
