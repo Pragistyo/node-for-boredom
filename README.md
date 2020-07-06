@@ -5,6 +5,9 @@
 
 ## ROUTES
 
+### Main URL
+https://provisions-interview.herokuapp.com
+
 #### Inpatient Routes
 
 | Route                                |  HTTP  | Description |
