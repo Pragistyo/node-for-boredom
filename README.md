@@ -86,14 +86,14 @@ Body for POST :
 (Create one medicalrecord data) end Point has to be as example of JSON equivalent below:
 ```yaml
 {
-    inpatient_id : 4,
-    doctor_id : 1,
-    consultdate : '2020-01-07',
-    bloodpressure : '95',
-    bpmnumber : '90',
-    pupil : 'normal',
-    temperature : '36.80',
-    polyclinic : 'GI'
+    "inpatient_id" : "4",
+    "doctor_id" : "1",
+    "consultdate" : "2020-01-07",
+    "bloodpressure" : "95",
+    "bpmnumber" : "90",
+    "pupil" : "normal",
+    "temperature" : "36.80",
+    "polyclinic" : "GI"
 }
 ```
 
