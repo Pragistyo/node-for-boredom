@@ -78,9 +78,8 @@ exports.create = async(req,res)=>{
 exports.getId = async (req,res)=>{
     const pool = new Pool(dbConfig)
     const queryString = `select * from medicalrecord where medicalrecord_id = ${req.params.id}`;
-
+    console.log('query: ', queryString)
     let conn;
-    
     try{
         let connErr;
         [conn, connErr] = await to(pool.connect())
@@ -89,10 +88,10 @@ exports.getId = async (req,res)=>{
         let [singleMedicalRecord, singleMedicalRecordErr] = await to(conn.query(queryString))
         if(singleMedicalRecordErr) throw singleMedicalRecordErr
 
-        let dataMedicalRecord;
         if (singleMedicalRecord.rows.length === 0) return res.status(404).json({msg: 'medical record not found'}) 
-        let response = { status: 200, message:'success', queryName:"MedicalRecordbyId", data: dataMedicalRecord}
+        let response = { status: 200, message:'success', queryName:"MedicalRecordbyId", data: singleMedicalRecord.rows[0]}
         return res.status(200).json(response)
+        // res.send(req.params.id)
 
     } catch (e){
         console.error(chalk.red('error MedicalRecord getById: ', e))
