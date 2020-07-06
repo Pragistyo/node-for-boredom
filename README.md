@@ -35,7 +35,6 @@ Body for POST
         "birthplace": "Bandung",
         "birthday": "1991-01-08",
         "bloodtype": "AB"
-    
 }
 ```
 
@@ -65,7 +64,7 @@ Body for POST (Create one doctor data) end Point has to be as example of JSON eq
             "zipcode": "10350",
             "birthplace": "Depok",
             "birthday": "1970-01-08",
-            "nik: "1110658214",
+            "nik": "1110658214",
             "specialization": "GI-Surgeon",
             "certificate": "GI-Certificate-surgeon",
             "datecertification": "2005-05-29" ,
@@ -101,7 +100,7 @@ Body for POST :
 To Get Data by interval Date and/or selected polyclinic 
 ```yaml
 {
-    "dateFrom: "2018-01-01",
+    "dateFrom": "2018-01-01",
     "dateTo": "2020-06-29",
     "polyclinic": "GI"
 }
