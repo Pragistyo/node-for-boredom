@@ -6,7 +6,7 @@
 ## ROUTES
 
 ### Main URL
-https://provisions-interview.herokuapp.com
+https://provisions-interview.herokuapp.com/provisions/api/v1
 
 #### Inpatient Routes
 
