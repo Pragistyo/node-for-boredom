@@ -144,7 +144,8 @@ exports.getDateRangePolyclinic = async(req,res) =>{
     try{
         let connErr;
         [conn, connErr] = await to(pool.connect())
-        if(connErr)  throw new Error("Error Connection Pool")
+        console.log(chalk.red('Error Connection Pool: ', connErr ))
+        if(connErr)  throw new Error("Error Connection Pool: ")
 
         let  queryString;
         (!req.body.polyclinic || req.body.polyclinic === '') ? 
