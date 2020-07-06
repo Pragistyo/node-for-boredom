@@ -1,0 +1,33 @@
+{
+  "name": "provision-test",
+  "version": "1.0.0",
+  "description": "for interview purpose of provisions",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon app.js --watch server --exec babel-node"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Pragistyo/node-for-boredom.git"
+  },
+  "author": "pragistyo",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Pragistyo/node-for-boredom/issues"
+  },
+  "homepage": "https://github.com/Pragistyo/node-for-boredom#readme",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "nodemon": "^2.0.4",
+    "pg": "^8.2.1"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.10.4",
+    "@babel/core": "^7.10.4",
+    "@babel/node": "^7.10.4",
+    "@babel/preset-env": "^7.10.4"
+  }
+}
