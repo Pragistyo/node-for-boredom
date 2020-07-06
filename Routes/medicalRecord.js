@@ -9,7 +9,7 @@ router.post('/',medicalRecordsController.create )//post new MedicalRecord
 router.get('/:id', medicalRecordsController.getId)
 // router.put('/:id', );
 router.delete('/:id', medicalRecordsController.remove);
-router.post('/byDatePolyclinic', medicalRecordsController.getDateRangePolyclinic)
+router.post('/byDate/Polyclinic', medicalRecordsController.getDateRangePolyclinic)
 
 
 export default router
