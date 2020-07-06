@@ -5,7 +5,7 @@ const config = {
     password: process.env.PASSWORD, 
     host: process.env.HOST, 
     max: 10,
-    port:process.env.PORT, 
+    port:process.env.DB_PORT, 
 };
 
 module.exports = config
