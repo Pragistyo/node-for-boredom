@@ -7,7 +7,7 @@ import medicalRecordsRoutes from './Routes/medicalRecord'
 import doctorRoutes from './Routes/doctors'
 
 const app = express()
-const port = 3000
+const port = process.env.PORT || 3000
 require('dotenv').config();
 
 
