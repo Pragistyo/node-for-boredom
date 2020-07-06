@@ -17,6 +17,7 @@
 
 Body for POST 
 (Create one Inpatient data) end Point has to be as example of JSON equivalent below:
+```yaml
 {
         firstname:`Budi`,
         middlename: 'Agung',
@@ -32,6 +33,7 @@ Body for POST
         birthday: '1991-01-08',
         bloodtype: 'AB'
     }
+```
 
 #### Doctor Routes
 
@@ -43,7 +45,9 @@ Body for POST
 | `/provisions/api/v1/doctors/:id`  | PUT    | Update one doctor data
 | `/provisions/api/v1/doctors/:id`  | DELETE | Delete one doctor data
 
+
 Body for POST (Create one doctor data) end Point has to be as example of JSON equivalent below:
+```yaml
         {
             firstname:`Ahmad`,
             middlename: 'Subekni',
@@ -63,7 +67,7 @@ Body for POST (Create one doctor data) end Point has to be as example of JSON eq
             datecertification: '2005-05-29' ,
             countpatientnumber:0
         }
-
+```
 #### Doctor Routes
 
 | Route                                                    |  HTTP  | Description |
@@ -77,6 +81,7 @@ Body for POST (Create one doctor data) end Point has to be as example of JSON eq
 
 Body for POST :
 (Create one medicalrecord data) end Point has to be as example of JSON equivalent below:
+```yaml
 {
     inpatient_id : 4
     doctor_id : 1
@@ -87,11 +92,14 @@ Body for POST :
     temperature : '36.80'
     polyclinic : 'GI'
 }
+```
 
 To Get Data by interval Date and/or selected polyclinic 
+```yaml
 {
     dateFrom: '2018-01-01'
     dateTo: '2020-06-29'
     polyclinic: 'GI'
 }
+```
 
