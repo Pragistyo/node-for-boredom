@@ -4,7 +4,7 @@
   "description": "for interview purpose of provisions",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon app.js --watch server --exec babel-node"
+    "start": "nodemon start.js --watch server --exec babel-node"
   },
   "repository": {
     "type": "git",
