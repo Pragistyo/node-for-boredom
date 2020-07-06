@@ -78,11 +78,13 @@ exports.updateInpatientById = async(req,res)=>{
             [conn, connErr] = await to(pool.connect())
             if(connErr)  throw new Error("Error Connection Pool")
 
-            let [updateInpatient, updateInpatientErr] = await to(conn.query(queryPool.updateInpatient(req.body)))
+            let [updateInpatient, updateInpatientErr] = await to(conn.query(queryPool.updateInpatient(req.body, req.params.id)))
+            console.log('updateInpatientErr" ', queryPool.updateInpatient(req.body, req.params.id))
             if(updateInpatientErr) throw updateInpatientErr.toString()
             
             let response = { status: 201 , message:'success', queryName:"update Inpatient", updated: updateInpatient}
             res.status(201).json( response)
+            // res.send({body:req.body, params: req.params.id})
 
         } catch (e){
             console.error('error update Inpatient: ', e)

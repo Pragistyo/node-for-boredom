@@ -52,7 +52,7 @@ Body for POST
 Body for POST (Create one doctor data) end Point has to be as example of JSON equivalent below:
 ```yaml
         {
-            "firstname": 'Ahmad',
+            "firstname": "Ahmad",
             "middlename": "Subekni",
             "lastname": "Dwiantara",
             "mobilenumber": "081189472745",

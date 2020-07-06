@@ -6,7 +6,7 @@ const router = express.Router()
 
 router.get('/', doctroController.getAll); 
 router.post('/', doctroController.create);
-router.patch('/:id', doctroController.updateDoctorById)
+router.put('/:id', doctroController.updateDoctorById)
 router.get('/:id', doctroController.getId);
 router.delete('/:id', doctroController.remove);
 

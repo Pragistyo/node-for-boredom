@@ -9,24 +9,25 @@ exports.insertInpatiens = (param)=>{
         '${param.state}','${param.city}', '${param.zipcode}', '${param.birthplace}', '${param.birthday}','${param.bloodtype}');`
 }
 
-exports.updateInpatient = (param)=>{
+exports.updateInpatient = (param,id)=>{
     return`
     UPDATE inpatient
-    SET firstname = ${param.firstname} ,
-        middlename = ${param.middlename} ,
-        lastname = ${param.lastname} ,
-        mobilenumber = ${param.mobilenumber} ,
-        gender = ${param.gender} ,
-        address1 = ${param.address1} ,
-        address2 = ${param.address2} ,
-        state = ${param.state} ,
-        city = ${param.city} ,
-        zipcode = ${param.zipcode} ,
-        birthplace = ${param.birthplace} ,
-        birthday = ${param.birthday} ,
-        bloodtype = ${param.bloodtype} 
+    SET firstname = '${param.firstname}' ,
+        middlename =  '${param.middlename}',
+        lastname =  '${param.lastname}',
+        mobilenumber =  '${param.mobilenumber}',
+        gender =  '${param.gender}',
+        address1 =  '${param.address1}',
+        address2 =  '${param.address2}',
+        state =  '${param.state}',
+        city =   '${param.city}',
+        zipcode =  '${param.zipcode}',
+        birthplace =  '${param.birthplace}',
+        birthday = '${param.birthday}',
+        bloodtype =   '${param.bloodtype}' 
     WHERE
-        inpatient_id = ${param.inpatient_id}'`
+        inpatient_id = ${id}
+        `
 }
 
 
@@ -45,27 +46,27 @@ exports.insertDoctors = (param)=>{
         '${param.nik}', '${param.specialization}','${param.certificate}','${param.datecertification}', '${param.countpatientnumber}');`
 }
 
-exports.updateDoctor = (param)=>{
-    `UPDATE doctor
-    SET firstname = ${param.firstname} ,
-        middlename = ${param.middlename} ,
-        lastname = ${param.lastname} ,
-        mobilenumber = ${param.mobilenumber} ,
-        gender = ${param.gender} ,
-        address1 = ${param.address1} ,
-        address2 = ${param.address2} ,
-        state = ${param.state} ,
-        city = ${param.city} ,
-        zipcode = ${param.zipcode} ,
-        birthplace = ${param.birthplace} ,
-        birthday = ${param.birthday} ,
-        nik = ${param.nik} ,
-        specialization = ${param.specialization} ,
-        certificate = ${param.certificate} ,
-        datecertification = ${param.datecertification} ,
-        countpatientnumber = ${param.countpatientnumber} ,
+exports.updateDoctor = (param,id)=>{
+    return`UPDATE doctor
+    SET firstname = '${param.firstname}' OR OGI,
+        middlename = '${param.middlename}' OR OGI,
+        lastname = '${param.lastname}' OR OGI,
+        mobilenumber = '${param.mobilenumber}' OR OGI,
+        gender = '${param.gender}' OR OGI,
+        address1 = '${param.address1}' OR OGI,
+        address2 = '${param.address2}' OR OGI,
+        state = '${param.state}' OR OGI,
+        city = '${param.city}' OR OGI,
+        zipcode = '${param.zipcode}' OR OGI,
+        birthplace = '${param.birthplace}' OR OGI,
+        birthday = '${param.birthday}' OR OGI,
+        nik = '${param.nik}' OR OGI,
+        specialization = '${param.specialization}' OR OGI,
+        certificate = '${param.certificate}' OR OGI,
+        datecertification = '${param.datecertification}' OR OGI,
+        countpatientnumber = '${param.countpatientnumber}' OR OGI,
     WHERE
-        doctor_id = ${param.doctor_id}'`
+        doctor_id = ${id}'`
 }
 
 

@@ -9,6 +9,6 @@ router.get('/', inpatientsController.getAll
 router.post('/', inpatientsController.create )//post new inpatients
 router.get('/:id', inpatientsController.getId)
 router.delete('/:id', inpatientsController.remove);
-router.patch('/:id', inpatientsController.updateInpatientById);
+router.put('/:id', inpatientsController.updateInpatientById);
 
 export default router
