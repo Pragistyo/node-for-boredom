@@ -2,7 +2,7 @@ console.log('controllers doctors')
 import dbConfig from '../dbConfig'
 import {Pool, Client} from'pg'
 import chalk from 'chalk'
-import to from '../helper/to'
+import to from '../Helper/to'
 import queryPool from './query'
 
 exports.getAll = async (req, res)=>{
