@@ -22,20 +22,21 @@ Body for POST
 (Create one Inpatient data) end Point has to be as example of JSON equivalent below:
 ```yaml
 {
-        firstname: 'Budi',
-        middlename: 'Agung',
-        lastname: 'Saleh',
-        mobilenumber: '081298782733',
-        gender: 'male',
-        address1: 'Jl. Kaliurang, Kuningan, West-Java',
-        address2: 'Jl. Penjaringan, North-Jakarta, DKI-Jakarta',
-        state: 'Indonesia',
-        city: 'DKI-Jakarta',
-        zipcode: '14440',
-        birthplace: 'Bandung',
-        birthday: '1991-01-08',
-        bloodtype: 'AB'
-    }
+        "firstname":"Budi",
+        "middlename": "Agung",
+        "lastname": "Saleh",
+        "mobilenumber": "081298782733",
+        "gender": "male",
+        "address1": "Jl. Kaliurang, Kuningan, West-Java",
+        "address2": "Jl. Penjaringan, North-Jakarta, DKI-Jakarta",
+        "state": "Indonesia",
+        "city": "DKI-Jakarta",
+        "zipcode": "14440",
+        "birthplace": "Bandung",
+        "birthday": "1991-01-08",
+        "bloodtype": "AB"
+    
+}
 ```
 
 #### Doctor Routes
@@ -52,23 +53,23 @@ Body for POST
 Body for POST (Create one doctor data) end Point has to be as example of JSON equivalent below:
 ```yaml
         {
-            firstname: 'Ahmad',
-            middlename: 'Subekni',
-            lastname: 'Dwiantara',
-            mobilenumber: '081189472745',
-            gender: 'Male',
-            address1: 'Jl. Kelinci, Bogor, West-Java',
-            address2: 'Jl. Menteng, Central-Jakarta, DKI-Jakarta',
-            state: 'Indonesia',
-            city: 'DKI-Jakarta',
-            zipcode: '10350',
-            birthplace: 'Depok',
-            birthday: '1970-01-08',
-            nik: '1110658214',
-            specialization: 'GI-Surgeon',
-            certificate: 'GI-Certificate-surgeon',
-            datecertification: '2005-05-29' ,
-            countpatientnumber:0
+            "firstname": 'Ahmad',
+            "middlename": "Subekni",
+            "lastname": "Dwiantara",
+            "mobilenumber": "081189472745",
+            "gender": "Male",
+            "address1": "Jl. Kelinci, Bogor, West-Java",
+            "address2": "Jl. Menteng, Central-Jakarta, DKI-Jakarta",
+            "state": "Indonesia",
+            "city": "DKI-Jakarta",
+            "zipcode": "10350",
+            "birthplace": "Depok",
+            "birthday": "1970-01-08",
+            "nik: "1110658214",
+            "specialization": "GI-Surgeon",
+            "certificate": "GI-Certificate-surgeon",
+            "datecertification": "2005-05-29" ,
+            "countpatientnumber":"0"
         }
 ```
 #### Doctor Routes
@@ -100,9 +101,9 @@ Body for POST :
 To Get Data by interval Date and/or selected polyclinic 
 ```yaml
 {
-    dateFrom: '2018-01-01',
-    dateTo: '2020-06-29',
-    polyclinic: 'GI'
+    "dateFrom: "2018-01-01",
+    "dateTo": "2020-06-29",
+    "polyclinic": "GI"
 }
 ```
 
