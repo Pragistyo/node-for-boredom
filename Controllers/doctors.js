@@ -74,7 +74,7 @@ exports.updateDoctorById = async(req,res)=>{
             [conn, connErr] = await to(pool.connect())
             if(connErr)  throw new Error("Error Connection Pool")
 
-            let [updateDoctor, updateDoctorErr] = await to(conn.query(queryPool.updateDoctor(req.body)))
+            let [updateDoctor, updateDoctorErr] = await to(conn.query(queryPool.updateDoctor(req.body, req.params.id)))
             if(updateDoctorErr) throw updateDoctorErr
             
             let response = { status: 201 , message:'success', queryName:"update Doctor", updated: updateDoctor}

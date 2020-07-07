@@ -137,25 +137,29 @@ exports.remove = async(req,res)=>{
 exports.getDateRangePolyclinic = async(req,res) =>{
     const pool = new Pool(dbConfig)
     // const queryString = `delete from doctor where medicalrecord_id = ${req.params.id}`;
-    
     let conn;
 
     try{
         let connErr;
         [conn, connErr] = await to(pool.connect())
-        console.log(chalk.red('Error Connection Pool: ', connErr ))
-        if(connErr)  throw new Error("Error Connection Pool: ")
+        if(connErr) throw connErr
+        console.log('conn: ', conn)
 
         let  queryString;
         (!req.body.polyclinic || req.body.polyclinic === '') ? 
         queryString = queryPool.queryMedicalRecordDateRange(req.body): queryString = queryPool.queryMedicalRecordDateRangePolyclinic(req.body)
-        
+
         let getDateRangePolyclinic,getDateRangePolyclinicErr;
         [getDateRangePolyclinic, getDateRangePolyclinicErr] = await to(conn.query(queryString))
         if (getDateRangePolyclinicErr) throw getDateRangePolyclinicErr
-
+ 
+        let arrPolycinic = new Array()
+        getDateRangePolyclinic.rows.forEach( (e, i, a) =>{
+            // console.log('element: ', e.polyclinic)
+            arrPolycinic.push(e.polyclinic)
+        })
         let objResponse = {
-            polyclinic: (req.body.polyclinic)? req.body.polyclinic:null,
+            polyclinic: (req.body.polyclinic)? req.body.polyclinic: arrPolycinic,
             consult_total: `${getDateRangePolyclinic.rows[0].count} times`,
             ab_bloodtype : `${getDateRangePolyclinic.rows[0].bloodtype_ab} times`,
             a_bloodtype : `${getDateRangePolyclinic.rows[0].bloodtype_a} times`,
@@ -176,3 +180,4 @@ exports.getDateRangePolyclinic = async(req,res) =>{
         }catch(e){ console.log('Error close conn: ',e) }
     }
 }
+

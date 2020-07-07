@@ -155,5 +155,5 @@ exports.queryMedicalRecordDateRangePolyclinic = (params) =>{
         SUM(CASE WHEN bloodtype = 'AB' then 1 else 0 end )OVER() AS bloodtype_AB
     FROM u 
     `
-
+  
 }
