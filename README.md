@@ -79,12 +79,12 @@ Body for POST (Create one doctor data) end Point has to be as example of JSON eq
 
 | Route                                                    |  HTTP  | Description |
 | -------------------------------------------------------- | ------ | --------------|
-| `/provisions/api/v1/medicalRecord`                       | GET    | Get all doctors data
-| `/provisions/api/v1/medicalRecord`                       | POST   | Create one doctor data
+| `/provisions/api/v1/medicalRecord`                       | GET    | Get all medicalRecord data
+| `/provisions/api/v1/medicalRecord`                       | POST   | Create one medicalRecord data
 | `/provisions/api/v1/medicalRecord/byDatePolyclinic`      | POST   | Return consult sum by date interval and/or selected polyclinic
-| `/provisions/api/v1/medicalRecord/:id`                   | GET    | Get one doctor data
-| `/provisions/api/v1/medicalRecord/:id`                   | PUT    | Update one doctor data
-| `/provisions/api/v1/medicalRecord/:id`                   | DELETE | Delete one doctor data
+| `/provisions/api/v1/medicalRecord/:id`                   | GET    | Get one medicalRecord data
+| `/provisions/api/v1/medicalRecord/:id`                   | PUT    | Update one medicalRecord data
+| `/provisions/api/v1/medicalRecord/:id`                   | DELETE | Delete one medicalRecord data
 
 Body for POST :
 (Create one medicalrecord data) end Point has to be as example of JSON equivalent below:
