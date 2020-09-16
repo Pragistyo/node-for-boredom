@@ -2,8 +2,7 @@
 
 ##This project name to avoid github suggested name "shiny-octo-couscus".
 
-This project is about API implementation of mini hospital application.
-
+This project is about API implementation of mini hospital application.  
 There are three subjects on this project: Doctor, Patients, medical records.
 This project build by nodeJS + PostgrestSQL
 
