@@ -75,7 +75,7 @@ Body for POST (Create one doctor data) end Point has to be as example of JSON eq
             "countpatientnumber":"0"
         }
 ```
-#### Doctor Routes
+#### Medical Records Routes
 
 | Route                                                    |  HTTP  | Description |
 | -------------------------------------------------------- | ------ | --------------|
