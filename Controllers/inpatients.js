@@ -36,9 +36,6 @@ exports.getAll = async (req, res)=>{
 
 
 
-
-
-
 exports.create = async (req,res)=>{
     const pool = new Pool(dbConfig)
     let conn;
@@ -48,7 +45,12 @@ exports.create = async (req,res)=>{
         [conn, connErr] = await to(pool.connect())
         if(connErr)  throw new Error("Error Connection Pool")
 
-        let [createInpatient, createInpatientErr] = await to(conn.query(queryPool.insertInpatiens(req.body)))
+        let [createInpatient, createInpatientErr] = await to(
+            conn.query(
+                queryPool.insertInpatiens,
+                queryPool.insertInpatiensValue(req.body)
+                )
+            )
         if(createInpatientErr) throw createInpatientErr.toString()
         
         let response = { status: 201 , message:'success', queryName:"insert Inpatient", created: createInpatient}
@@ -78,7 +80,12 @@ exports.updateInpatientById = async(req,res)=>{
             [conn, connErr] = await to(pool.connect())
             if(connErr)  throw new Error("Error Connection Pool")
 
-            let [updateInpatient, updateInpatientErr] = await to(conn.query(queryPool.updateInpatient(req.body, req.params.id)))
+            let [updateInpatient, updateInpatientErr] = await to(
+                conn.query(
+                    queryPool.updateInpatient,
+                    queryPool.updateInpatientValue(req.body, req.params.id)
+                    )
+                )
             console.log('updateInpatientErr" ', queryPool.updateInpatient(req.body, req.params.id))
             if(updateInpatientErr) throw updateInpatientErr.toString()
             
@@ -102,7 +109,7 @@ exports.updateInpatientById = async(req,res)=>{
 
 exports.getId = async(req,res)=>{
     const pool = new Pool(dbConfig)
-    const queryString = `select * from inpatient where inpatient_id = ${req.params.id}`;
+    const queryString = `select * from inpatient where inpatient_id = $1`;
 
     let conn;
     
@@ -111,7 +118,7 @@ exports.getId = async(req,res)=>{
         [conn, connErr] = await to(pool.connect())
         if(connErr)  throw new Error("Error Connection Pool")
         
-        let [singleInpatient, singleInpatientErr] = await to(conn.query(queryString))
+        let [singleInpatient, singleInpatientErr] = await to(conn.query(queryString, req.params.id))
         console.log(singleInpatient)
         if(singleInpatientErr) throw singleInpatientErr
 
@@ -134,14 +141,14 @@ exports.getId = async(req,res)=>{
 
 exports.remove = async(req,res)=>{
     const pool = new Pool(dbConfig)
-    const queryString = `delete from inpatient where inpatient_id = ${req.params.id}`;
+    const queryString = `delete from inpatient where inpatient_id = $1`;
     let conn;
     try{
         let connErr;
         [conn, connErr] = await to(pool.connect())
         if(connErr)  throw new Error("Error Connection Pool")
         
-        let [deleteInpatient, deleteInpatientErr] = await to(conn.query(queryString))
+        let [deleteInpatient, deleteInpatientErr] = await to(conn.query(queryString,req.params.id))
         if(deleteInpatientErr) throw deleteInpatientErr
 
         let response = { status: 200, queryName:"deleteInpatient", data: deleteInpatient}

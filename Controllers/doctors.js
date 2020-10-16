@@ -5,6 +5,8 @@ import chalk from 'chalk'
 import to from '../Helper/to'
 import queryPool from './query'
 
+import Doctor from '../Models/Doctor'
+
 exports.getAll = async (req, res)=>{
     const pool = new Pool(dbConfig)
     const queryString = 'select * from doctor ORDER BY doctor_id ASC';
@@ -12,7 +14,7 @@ exports.getAll = async (req, res)=>{
     try{
         let connErr;
         [conn, connErr] = await to(pool.connect())
-        if(connErr)  throw new Error("Error Connection Pool")
+        if(connErr)  throw new Error("Error Connection Pool doctor getAll")
         
         let [resultAllDoctors, resultAllDoctorsErr] = await to(conn.query(queryString))
         if(resultAllDoctorsErr) throw resultAllDoctorsErr
@@ -45,7 +47,12 @@ exports.create = async (req,res)=>{
             [conn, connErr] = await to(pool.connect())
             if(connErr)  throw new Error("Error Connection Pool")
     
-            let [createDoctor, createDoctorErr] = await to(conn.query(queryPool.insertInpatiens(req.body)))
+            let [createDoctor, createDoctorErr] = await to(
+                conn.query(
+                    queryPool.insertDoctors,
+                    queryPool.insertInpatiensValue(req.body)
+                    )
+                )
             if(createDoctorErr) throw createDoctorErr
             
             let response = { status: 201 , message:'success', queryName:"insert Doctor", created: createDoctor}
@@ -74,7 +81,12 @@ exports.updateDoctorById = async(req,res)=>{
             [conn, connErr] = await to(pool.connect())
             if(connErr)  throw new Error("Error Connection Pool")
 
-            let [updateDoctor, updateDoctorErr] = await to(conn.query(queryPool.updateDoctor(req.body, req.params.id)))
+            let [updateDoctor, updateDoctorErr] = await to(
+                conn.query(
+                    queryPool.updateDoctor,
+                    queryPool.updateDoctorValue(req.body, req.params.id),
+                    )
+                )
             if(updateDoctorErr) throw updateDoctorErr
             
             let response = { status: 201 , message:'success', queryName:"update Doctor", updated: updateDoctor}
@@ -95,14 +107,9 @@ exports.updateDoctorById = async(req,res)=>{
 
 
 
-
-
-
-
-
 exports.getId = async (req,res)=>{
     const pool = new Pool(dbConfig)
-    const queryString = `select * from doctor where doctor_id = ${req.params.id}`;
+    const queryString = `select * from doctor where doctor_id = $1`;
 
     let conn;
     
@@ -111,7 +118,7 @@ exports.getId = async (req,res)=>{
         [conn, connErr] = await to(pool.connect())
         if(connErr)  throw new Error("Error Connection Pool")
         
-        let [singleDoctor, singleDoctorErr] = await to(conn.query(queryString))
+        let [singleDoctor, singleDoctorErr] = await to(conn.query(queryString,req.params.id))
         if(singleDoctorErr) throw singleDoctorErr
 
         if (singleDoctor.rows.length === 0 ) return res.status(404).json({msg: 'data not found'})
@@ -133,14 +140,14 @@ exports.getId = async (req,res)=>{
 
 exports.remove = async(req,res)=>{
     const pool = new Pool(dbConfig)
-    const queryString = `delete from doctor where doctor_id = ${req.params.id}`;
+    const queryString = `delete from doctor where doctor_id = $1}`;
     let conn;
     try{
         let connErr;
         [conn, connErr] = await to(pool.connect())
         if(connErr)  throw new Error("Error Connection Pool")
         
-        let [deleteDoctor, deleteDoctorErr] = await to(conn.query(queryString))
+        let [deleteDoctor, deleteDoctorErr] = await to(conn.query(queryString, req.params.id))
         if(deleteDoctorErr) throw deleteDoctorErr
 
         let response = { status: 200, queryName:"deleteDoctor", data: deleteDoctor}

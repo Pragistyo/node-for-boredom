@@ -24,7 +24,9 @@ app.use('/provisions/api/v1/doctors', doctorRoutes)
 app.use('/provisions/api/v1/medicalRecord', medicalRecordsRoutes)
 
 
+
 app.listen(port, () => console.log(
-    chalk.blue(`Example app listening on port  ${chalk.yellow(port)}!`)
+    chalk.blue(`Example app listening on port  ${chalk.yellow(port)}!`),
+    
 ))
 

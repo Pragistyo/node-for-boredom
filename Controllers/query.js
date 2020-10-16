@@ -1,85 +1,122 @@
 // inpatients
 
-exports.insertInpatiens = (param)=>{
-    return `
+exports.insertInpatiens =  `
     INSERT INTO inpatient
-    (inpatient_id, firstname,middlename,lastname,mobilenumber, gender ,address1, address2, state, city, zipcode, birthplace, birthday, bloodtype)
+    (
+        inpatient_id, 
+        firstname,
+        middlename,
+        lastname,
+        mobilenumber, 
+        gender ,
+        address1, 
+        address2, 
+        state, city, 
+        zipcode, 
+        birthplace, 
+        birthday, 
+        bloodtype)
     VALUES 
-    (DEFAULT, '${param.firstname}','${param.middlename}','${param.lastname}','${param.mobilenumber}','${param.gender}','${param.address1}','${param.address2}',
-        '${param.state}','${param.city}', '${param.zipcode}', '${param.birthplace}', '${param.birthday}','${param.bloodtype}');`
+    (DEFAULT, $1,$2,$3,$4,$5,$6,$7,
+        $8,$9, $10, $11, $12,$13);`
+
+exports.insertInpatiensValue = (param)=>{
+    let arrayInsertPatients = [
+        param.firstname,param.middlename,param.lastname,param.mobilenumber,param.gender,param.address1,param.address2,
+        param.state,param.city, param.zipcode, param.birthplace, param.birthday,param.bloodtype
+    ]
+    return arrayInsertPatients
 }
 
-exports.updateInpatient = (param,id)=>{
-    return`
+exports.updateInpatient = `
     UPDATE inpatient
-    SET firstname = '${param.firstname}' ,
-        middlename =  '${param.middlename}',
-        lastname =  '${param.lastname}',
-        mobilenumber =  '${param.mobilenumber}',
-        gender =  '${param.gender}',
-        address1 =  '${param.address1}',
-        address2 =  '${param.address2}',
-        state =  '${param.state}',
-        city =   '${param.city}',
-        zipcode =  '${param.zipcode}',
-        birthplace =  '${param.birthplace}',
-        birthday = '${param.birthday}',
-        bloodtype =   '${param.bloodtype}' 
+    SET firstname = $1,
+        middlename =  $2,
+        lastname =  $3,
+        mobilenumber =  $4,
+        gender =  $5,
+        address1 =  $6,
+        address2 =  $7,
+        state =  $8,
+        city =   $9,
+        zipcode =  $,10
+        birthplace =  $11,
+        birthday = $12,
+        bloodtype =   $13 
     WHERE
-        inpatient_id = ${id}
+        inpatient_id = $14
         `
+
+exports.updateInpatientValue = (param,id)=>{
+    let arrayUpdateInpatient = [
+        param.firstname,param.middlename, param.lastname, param.mobilenumber,param.gender,param.address1,
+        param.address2,param.state,param.city,param.zipcode,param.birthplace,param.birthday,param.bloodtype,
+        id
+    ]
+    return arrayUpdateInpatient
 }
-
-
 
 
 
 // doctors
-exports.insertDoctors = (param)=>{
-    return `
+exports.insertDoctors =  `
     INSERT INTO doctor
     (doctor_id, firstname,middlename,lastname,mobilenumber, gender ,address1, address2, state, city, zipcode, birthplace, birthday, 
         nik, specialization ,certificate, datecertification, countpatientnumber)
     VALUES 
-    (DEFAULT, '${param.firstname}','${param.middlename}','${param.lastname}','${param.mobilenumber}','${param.gender}','${param.address1}','${param.address2}',
-        '${param.state}','${param.city}', '${param.zipcode}', '${param.birthplace}', '${param.birthday}',
-        '${param.nik}', '${param.specialization}','${param.certificate}','${param.datecertification}', '${param.countpatientnumber}');`
+    (DEFAULT, $1,$2,$3,$4,$5,$6,$7,
+        $8,$9, $10, $11, $12,
+        $13, $14,$15,$16, $17);`
+
+
+exports.insertDoctorsValue = (param)=>{
+    let arrayInsertDoctors = [
+        param.firstname,param.middlename,param.lastname,param.mobilenumber,param.gender,param.address1,param.address2,
+        param.state,param.city,param.zipcode,param.birthplace,param.birthday,param.nik,param.specialization,param.certificate,
+        param.datecertification,param.countpatientnumber
+    ]
+    return arrayInsertDoctors
 }
 
-exports.updateDoctor = (param,id)=>{
-    return`UPDATE doctor
-    SET firstname = '${param.firstname}' OR OGI,
-        middlename = '${param.middlename}' OR OGI,
-        lastname = '${param.lastname}' OR OGI,
-        mobilenumber = '${param.mobilenumber}' OR OGI,
-        gender = '${param.gender}' OR OGI,
-        address1 = '${param.address1}' OR OGI,
-        address2 = '${param.address2}' OR OGI,
-        state = '${param.state}' OR OGI,
-        city = '${param.city}' OR OGI,
-        zipcode = '${param.zipcode}' OR OGI,
-        birthplace = '${param.birthplace}' OR OGI,
-        birthday = '${param.birthday}' OR OGI,
-        nik = '${param.nik}' OR OGI,
-        specialization = '${param.specialization}' OR OGI,
-        certificate = '${param.certificate}' OR OGI,
-        datecertification = '${param.datecertification}' OR OGI,
-        countpatientnumber = '${param.countpatientnumber}' OR OGI,
+exports.updateDoctor = `UPDATE doctor
+    SET firstname = $1,
+        middlename = $2,
+        lastname = $3,
+        mobilenumber = $4,
+        gender = $5,
+        address1 = $6,
+        address2 = $7,
+        state = $8,
+        city = $9,
+        zipcode = $10,
+        birthplace = $11,
+        birthday = $12,
+        nik = $13,
+        specialization = $14,
+        certificate = $15,
+        datecertification = $16,
+        countpatientnumber = $17,
     WHERE
-        doctor_id = ${id}'`
-}
+        doctor_id = $18'`
 
+exports.updateDoctorValue = (param,id)=>{
+    let arrayUpdateDoctor = [
+        param.firstname,param.middlename,param.lastname,param.mobilenumber,param.gender,param.address1,param.address2,
+        param.state,param.city,param.zipcode,param.birthplace,param.birthday,param.nik,param.specialization,param.certificate,
+        param.datecertification,param.countpatientnumber,id
+    ]
+    return arrayUpdateDoctor
+}
 
 // medicalRecords
 
-exports.insertMedicalRecord = (param) =>{
-    return `
+exports.insertMedicalRecord = `
     WITH i AS (
         INSERT INTO medicalrecord
         (medicalrecord_id, inpatient_id, doctor_id, consultdate, bloodpressure, bpmnumber ,pupil, temperature, polyclinic)
         VALUES 
-        (DEFAULT, '${param.inpatient_id}','${param.doctor_id}','${param.consultdate}', '${param.bloodpressure}',
-        '${param.bpmnumber}', '${param.pupil}', '${param.temperature}','${param.polyclinic}')
+        (DEFAULT, $1,$2,$3, $4,
+        $5, $6, $7,$8)
         RETURNING *
       )
     UPDATE doctor AS a
@@ -88,6 +125,13 @@ exports.insertMedicalRecord = (param) =>{
       WHERE i.doctor_id = a.doctor_id
       RETURNING i, countpatientnumber, firstname, middlename, lastname
       `
+
+exports.insertMedicalRecordValue = (param)=>{
+    let arrayInsertMedicalRecord = [
+        param.inpatient_id,param.doctor_id,param.consultdate,param.bloodpressure,param.bpmnumber,
+        param.pupil,param.temperature,param.polyclinic
+    ]
+    return arrayInsertMedicalRecord
 }
 
 exports.removeMedicalRecords = (param) =>{
