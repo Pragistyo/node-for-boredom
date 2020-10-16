@@ -2,6 +2,10 @@
 
 ##This project name to avoid github suggested name "shiny-octo-couscus".
 
+This project is about API implementation of mini hospital application.  
+There are three subjects on this project: Doctor, Patients, medical records.  
+This project build by nodeJS + PostgrestSQL
+
 
 ## ROUTES
 
@@ -71,16 +75,16 @@ Body for POST (Create one doctor data) end Point has to be as example of JSON eq
             "countpatientnumber":"0"
         }
 ```
-#### Doctor Routes
+#### Medical Records Routes
 
 | Route                                                    |  HTTP  | Description |
 | -------------------------------------------------------- | ------ | --------------|
-| `/provisions/api/v1/medicalRecord`                       | GET    | Get all doctors data
-| `/provisions/api/v1/medicalRecord`                       | POST   | Create one doctor data
+| `/provisions/api/v1/medicalRecord`                       | GET    | Get all medicalRecord data
+| `/provisions/api/v1/medicalRecord`                       | POST   | Create one medicalRecord data
 | `/provisions/api/v1/medicalRecord/byDatePolyclinic`      | POST   | Return consult sum by date interval and/or selected polyclinic
-| `/provisions/api/v1/medicalRecord/:id`                   | GET    | Get one doctor data
-| `/provisions/api/v1/medicalRecord/:id`                   | PUT    | Update one doctor data
-| `/provisions/api/v1/medicalRecord/:id`                   | DELETE | Delete one doctor data
+| `/provisions/api/v1/medicalRecord/:id`                   | GET    | Get one medicalRecord data
+| `/provisions/api/v1/medicalRecord/:id`                   | PUT    | Update one medicalRecord data
+| `/provisions/api/v1/medicalRecord/:id`                   | DELETE | Delete one medicalRecord data
 
 Body for POST :
 (Create one medicalrecord data) end Point has to be as example of JSON equivalent below:
