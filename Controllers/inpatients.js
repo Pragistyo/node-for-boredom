@@ -118,7 +118,7 @@ exports.getId = async(req,res)=>{
         [conn, connErr] = await to(pool.connect())
         if(connErr)  throw new Error("Error Connection Pool")
         
-        let [singleInpatient, singleInpatientErr] = await to(conn.query(queryString, req.params.id))
+        let [singleInpatient, singleInpatientErr] = await to(conn.query(queryString, [req.params.id]))
         console.log(singleInpatient)
         if(singleInpatientErr) throw singleInpatientErr
 
@@ -148,7 +148,7 @@ exports.remove = async(req,res)=>{
         [conn, connErr] = await to(pool.connect())
         if(connErr)  throw new Error("Error Connection Pool")
         
-        let [deleteInpatient, deleteInpatientErr] = await to(conn.query(queryString,req.params.id))
+        let [deleteInpatient, deleteInpatientErr] = await to(conn.query(queryString,[req.params.id]))
         if(deleteInpatientErr) throw deleteInpatientErr
 
         let response = { status: 200, queryName:"deleteInpatient", data: deleteInpatient}

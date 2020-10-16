@@ -118,7 +118,7 @@ exports.getId = async (req,res)=>{
         [conn, connErr] = await to(pool.connect())
         if(connErr)  throw new Error("Error Connection Pool")
         
-        let [singleDoctor, singleDoctorErr] = await to(conn.query(queryString,req.params.id))
+        let [singleDoctor, singleDoctorErr] = await to(conn.query(queryString,[req.params.id]))
         if(singleDoctorErr) throw singleDoctorErr
 
         if (singleDoctor.rows.length === 0 ) return res.status(404).json({msg: 'data not found'})
@@ -147,7 +147,7 @@ exports.remove = async(req,res)=>{
         [conn, connErr] = await to(pool.connect())
         if(connErr)  throw new Error("Error Connection Pool")
         
-        let [deleteDoctor, deleteDoctorErr] = await to(conn.query(queryString, req.params.id))
+        let [deleteDoctor, deleteDoctorErr] = await to(conn.query(queryString, [req.params.id]))
         if(deleteDoctorErr) throw deleteDoctorErr
 
         let response = { status: 200, queryName:"deleteDoctor", data: deleteDoctor}

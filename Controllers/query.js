@@ -134,17 +134,15 @@ exports.insertMedicalRecordValue = (param)=>{
     return arrayInsertMedicalRecord
 }
 
-exports.removeMedicalRecords = (param) =>{
-    
-    return `
+exports.removeMedicalRecords = `
     WITH u AS (
         UPDATE doctor 
         SET countpatientnumber = countpatientnumber - 1
         WHERE 
-            doctor.doctor_id = (SELECT doctor_id FROM medicalrecord WHERE medicalrecord_id = ${param}) 
+            doctor.doctor_id = (SELECT doctor_id FROM medicalrecord WHERE medicalrecord_id = $1) 
         RETURNING *
     )
-    DELETE from medicalrecord WHERE medicalrecord_id = ${param}
+    DELETE from medicalrecord WHERE medicalrecord_id = $2
     RETURNING *
     `
     // return `
@@ -155,7 +153,6 @@ exports.removeMedicalRecords = (param) =>{
     // WHERE 
     //     doctor.doctor_id = m.doctor_id
     // `
-}
 
 exports.queryMedicalRecordDateRange = (params) =>{
     return `

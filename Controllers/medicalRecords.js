@@ -41,7 +41,12 @@ exports.create = async(req,res)=>{
         [conn, connErr] = await to(pool.connect())
         if(connErr)  throw new Error("Error Connection Pool")
 
-        let [createMedicalRecord, createMedicalRecordErr] = await to(conn.query(queryPool.insertMedicalRecord(req.body)))
+        let [createMedicalRecord, createMedicalRecordErr] = await to(
+            conn.query(
+                queryPool.insertMedicalRecord,
+                queryPool.insertMedicalRecordValue(req.body)
+                )
+            )
         if(createMedicalRecordErr) throw createMedicalRecordErr
         
         let rawData  = createMedicalRecord.rows[0]
@@ -77,7 +82,8 @@ exports.create = async(req,res)=>{
 
 exports.getId = async (req,res)=>{
     const pool = new Pool(dbConfig)
-    const queryString = `select * from medicalrecord where medicalrecord_id = ${req.params.id}`;
+    const queryString = `select * from medicalrecord where medicalrecord_id = $1`;
+    const queryValue = [req.params.id]
     console.log('query: ', queryString)
     let conn;
     try{
@@ -85,7 +91,7 @@ exports.getId = async (req,res)=>{
         [conn, connErr] = await to(pool.connect())
         if(connErr)  throw new Error("Error Connection Pool")
         
-        let [singleMedicalRecord, singleMedicalRecordErr] = await to(conn.query(queryString))
+        let [singleMedicalRecord, singleMedicalRecordErr] = await to(conn.query(queryString, queryValue))
         if(singleMedicalRecordErr) throw singleMedicalRecordErr
 
         if (singleMedicalRecord.rows.length === 0) return res.status(404).json({msg: 'medical record not found'}) 
@@ -109,14 +115,16 @@ exports.getId = async (req,res)=>{
 exports.remove = async(req,res)=>{
     const pool = new Pool(dbConfig)
     // const queryString = `delete from doctor where medicalrecord_id = ${req.params.id}`;
-    const queryString = queryPool.removeMedicalRecords(req.params.id)
+    const medicalRecordId = req.params.id
+    const queryString = queryPool.removeMedicalRecords
+    const queryValue = [medicalRecordId,medicalRecordId]
     let conn;
     try{
         let connErr;
         [conn, connErr] = await to(pool.connect())
         if(connErr)  throw new Error("Error Connection Pool")
         
-        let [deleteMedicalRecord, deleteMedicalRecordErr] = await to(conn.query(queryString))
+        let [deleteMedicalRecord, deleteMedicalRecordErr] = await to(conn.query(queryString,queryValue))
         if(deleteMedicalRecordErr) throw deleteMedicalRecordErr
 
         let response = { status: 201, queryName:"deleteMedicalRecord", data: deleteMedicalRecord}
@@ -133,6 +141,9 @@ exports.remove = async(req,res)=>{
         }catch(e){ console.log('Error close conn: ',e) }
     }
 }
+
+
+
 
 exports.getDateRangePolyclinic = async(req,res) =>{
     const pool = new Pool(dbConfig)
