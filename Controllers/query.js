@@ -144,14 +144,7 @@ exports.removeMedicalRecords = `
     DELETE from medicalrecord WHERE medicalrecord_id = $2
     RETURNING *
     `
-    // return `
-    // UPDATE doctor 
-    // SET countpatientnumber = countpatientnumber - 1
-    // FROM
-    //     (SELECT doctor_id FROM medicalrecord WHERE medicalrecord_id = ${param} ) as m
-    // WHERE 
-    //     doctor.doctor_id = m.doctor_id
-    // `
+    
 
 exports.queryMedicalRecordDateRange = 
     `
@@ -208,3 +201,14 @@ exports.queryMedicalRecordDateRangePolyclinicValue = (param)=>{
         param.polyclinic, param.dateFrom, param.dateTo
     ]
 }
+
+
+
+// return `
+    // UPDATE doctor 
+    // SET countpatientnumber = countpatientnumber - 1
+    // FROM
+    //     (SELECT doctor_id FROM medicalrecord WHERE medicalrecord_id = ${param} ) as m
+    // WHERE 
+    //     doctor.doctor_id = m.doctor_id
+    // `

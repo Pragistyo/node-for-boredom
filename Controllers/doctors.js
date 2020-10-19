@@ -22,8 +22,8 @@ exports.getAll = async (req, res)=>{
             )
         if(resultAllDoctorsErr) throw resultAllDoctorsErr
 
-        // let response = { status: 200, message:'success', queryName:"All Doctors", data: resultAllDoctors.rows}
-        res.status(200).json('response')
+        let response = { status: 200, message:'success', queryName:"All Doctors", data: resultAllDoctors.rows}
+        res.status(200).json(response)
 
     }catch(e){
         let err = e.toString()
@@ -54,7 +54,7 @@ exports.create = async (req,res)=>{
             let [createDoctor, createDoctorErr] = await to(
                 conn.query(
                     queryPool.insertDoctors,
-                    queryPool.insertInpatiensValue(req.body)
+                    queryPool.insertDoctorsValue(req.body)
                     )
                 )
             if(createDoctorErr) throw createDoctorErr
@@ -148,7 +148,7 @@ exports.getId = async (req,res)=>{
 
 exports.remove = async(req,res)=>{
     const pool = new Pool(dbConfig)
-    const queryString = `delete from doctor where doctor_id = $1}`;
+    const queryString = `delete from doctor where doctor_id = $1`;
     let conn;
     try{
         let connErr;
