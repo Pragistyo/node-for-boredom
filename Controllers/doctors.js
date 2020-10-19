@@ -5,7 +5,6 @@ import chalk from 'chalk'
 import to from '../Helper/to'
 import queryPool from './query'
 
-import Doctor from '../Models/Doctor'
 
 exports.getAll = async (req, res)=>{
     const pool = new Pool(dbConfig)
@@ -15,16 +14,21 @@ exports.getAll = async (req, res)=>{
         let connErr;
         [conn, connErr] = await to(pool.connect())
         if(connErr)  throw new Error("Error Connection Pool doctor getAll")
+        console.log('=======================')
         
-        let [resultAllDoctors, resultAllDoctorsErr] = await to(conn.query(queryString))
+        let [resultAllDoctors, resultAllDoctorsErr] = await to(
+            conn.query(
+                queryString)
+            )
         if(resultAllDoctorsErr) throw resultAllDoctorsErr
 
-        let response = { status: 200, message:'success', queryName:"All Doctors", data: resultAllDoctors.rows}
-        res.status(200).json(response)
+        // let response = { status: 200, message:'success', queryName:"All Doctors", data: resultAllDoctors.rows}
+        res.status(200).json('response')
 
     }catch(e){
-        console.error(chalk.red('error getAll: ', e))
-        return res.status(400).json({msg:'error getAllDoctors', error: e})
+        let err = e.toString()
+        console.error(chalk.red('error getAll: ', err))
+        return res.status(400).json({msg:'error getAllDoctors', error: err})
     } finally {
         try{
             if (conn) await to(conn.end()); 
@@ -118,7 +122,11 @@ exports.getId = async (req,res)=>{
         [conn, connErr] = await to(pool.connect())
         if(connErr)  throw new Error("Error Connection Pool")
         
-        let [singleDoctor, singleDoctorErr] = await to(conn.query(queryString,[req.params.id]))
+        let [singleDoctor, singleDoctorErr] = await to(
+            conn.query(
+                queryString,[req.params.id]
+                )
+            )
         if(singleDoctorErr) throw singleDoctorErr
 
         if (singleDoctor.rows.length === 0 ) return res.status(404).json({msg: 'data not found'})
@@ -147,7 +155,11 @@ exports.remove = async(req,res)=>{
         [conn, connErr] = await to(pool.connect())
         if(connErr)  throw new Error("Error Connection Pool")
         
-        let [deleteDoctor, deleteDoctorErr] = await to(conn.query(queryString, [req.params.id]))
+        let [deleteDoctor, deleteDoctorErr] = await to(
+            conn.query(
+                queryString, [req.params.id]
+                )
+            )
         if(deleteDoctorErr) throw deleteDoctorErr
 
         let response = { status: 200, queryName:"deleteDoctor", data: deleteDoctor}

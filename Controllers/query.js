@@ -57,7 +57,6 @@ exports.updateInpatientValue = (param,id)=>{
 }
 
 
-
 // doctors
 exports.insertDoctors =  `
     INSERT INTO doctor
@@ -154,8 +153,8 @@ exports.removeMedicalRecords = `
     //     doctor.doctor_id = m.doctor_id
     // `
 
-exports.queryMedicalRecordDateRange = (params) =>{
-    return `
+exports.queryMedicalRecordDateRange = 
+    `
         WITH u AS(
             SELECT *
                 FROM medicalrecord 
@@ -163,7 +162,7 @@ exports.queryMedicalRecordDateRange = (params) =>{
                 ON medicalrecord.inpatient_id = inpatient.inpatient_id
             WHERE 
                 consultdate 
-            BETWEEN '${params.dateFrom}' AND '${params.dateTo}'
+            BETWEEN $1 AND $2
         )
         SELECT polyclinic,
             COUNT(*) OVER(),
@@ -173,20 +172,26 @@ exports.queryMedicalRecordDateRange = (params) =>{
             SUM(CASE WHEN bloodtype = 'AB' then 1 else 0 end )OVER() AS bloodtype_AB
         FROM u
     `
+
+
+exports.queryMedicalRecordDateRangeValue = (param)=>{
+    return[
+        param.dateFrom, param.dateTo
+    ]
 }
 
 
-exports.queryMedicalRecordDateRangePolyclinic = (params) =>{
-    return `
+exports.queryMedicalRecordDateRangePolyclinic = 
+    `
     WITH u AS(
         SELECT * 
             FROM medicalrecord 
             LEFT OUTER JOIN inpatient
             ON medicalrecord.inpatient_id = inpatient.inpatient_id
         WHERE 
-            polyclinic ='${params.polyclinic}'
+            polyclinic = $1
         AND 
-            consultdate BETWEEN '${params.dateFrom}' AND '${params.dateTo}'
+            consultdate BETWEEN $2 AND $3
     )
     SELECT polyclinic,
         COUNT(*) OVER(),
@@ -196,5 +201,10 @@ exports.queryMedicalRecordDateRangePolyclinic = (params) =>{
         SUM(CASE WHEN bloodtype = 'AB' then 1 else 0 end )OVER() AS bloodtype_AB
     FROM u 
     `
-  
+
+
+exports.queryMedicalRecordDateRangePolyclinicValue = (param)=>{
+    return[
+        param.polyclinic, param.dateFrom, param.dateTo
+    ]
 }

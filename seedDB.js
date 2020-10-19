@@ -1,6 +1,7 @@
 const {Pool} = require('pg');
 const dbConfig = require('./dbConfig')
 const to = require('./Helper/to')
+const chalk = require('chalk')
 
 const pool = new Pool(dbConfig);
 
@@ -53,12 +54,12 @@ const initSeedDB = async () => {
 
 
         // below manually insert
-        let [seedDbInPatients, seedDbInPatientsErr] = await to(conn.query( queryInsertInpatiens(seedInpatients[2]) ))
+        let [seedDbInPatients, seedDbInPatientsErr] = await to(conn.query( queryInsertInpatiens(seedInpatients[0]) ))
         if (seedDbInPatientsErr) throw seedDbInPatientsErr.toString()
         console.log(seedDbInPatients)
-        let [seedDbDoctors, seedDbDoctorsErr] = await to(conn.query( queryInsertDoctors(seedDoctors[2]) ))
-        if (seedDbDoctorsErr) throw seedDbDoctorsErr.toString()
-        console.log(seedDbDoctors)
+        // let [seedDbDoctors, seedDbDoctorsErr] = await to(conn.query( queryInsertDoctors(seedDoctors[2]) ))
+        // if (seedDbDoctorsErr) throw seedDbDoctorsErr.toString()
+        // console.log(seedDbDoctors)
 
     }catch(err){
         console.error('error seeding users: ', err)

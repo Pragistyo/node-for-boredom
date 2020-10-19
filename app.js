@@ -15,7 +15,7 @@ app.use(cors())
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended:true}))
 
-const DATABASE_URL = process.env.POSTGRES_URL;
+const DATABASE_URL = process.env.POSTGRES_URL_LOCAL;
 
 
 app.get('/provisions/api/v1/', (req, res) => res.send('Hello Perovisions!'))

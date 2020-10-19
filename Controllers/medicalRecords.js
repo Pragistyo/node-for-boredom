@@ -91,7 +91,11 @@ exports.getId = async (req,res)=>{
         [conn, connErr] = await to(pool.connect())
         if(connErr)  throw new Error("Error Connection Pool")
         
-        let [singleMedicalRecord, singleMedicalRecordErr] = await to(conn.query(queryString, queryValue))
+        let [singleMedicalRecord, singleMedicalRecordErr] = await to(
+            conn.query(
+                queryString, queryValue
+                )
+            )
         if(singleMedicalRecordErr) throw singleMedicalRecordErr
 
         if (singleMedicalRecord.rows.length === 0) return res.status(404).json({msg: 'medical record not found'}) 
@@ -124,7 +128,11 @@ exports.remove = async(req,res)=>{
         [conn, connErr] = await to(pool.connect())
         if(connErr)  throw new Error("Error Connection Pool")
         
-        let [deleteMedicalRecord, deleteMedicalRecordErr] = await to(conn.query(queryString,queryValue))
+        let [deleteMedicalRecord, deleteMedicalRecordErr] = await to(
+            conn.query(
+                queryString,queryValue
+                )
+                )
         if(deleteMedicalRecordErr) throw deleteMedicalRecordErr
 
         let response = { status: 201, queryName:"deleteMedicalRecord", data: deleteMedicalRecord}
@@ -146,6 +154,8 @@ exports.remove = async(req,res)=>{
 
 
 exports.getDateRangePolyclinic = async(req,res) =>{
+    let arrValueMedicalRecordDataRange =[req.body.dateFrom, req.body.dateTo]
+    let arrValueMedicalRecordDataRangePolyclinic = [req.body.polyclinic, req.body.dateFrom, req.body.dateTo] 
     const pool = new Pool(dbConfig)
     // const queryString = `delete from doctor where medicalrecord_id = ${req.params.id}`;
     let conn;
@@ -156,12 +166,24 @@ exports.getDateRangePolyclinic = async(req,res) =>{
         if(connErr) throw connErr
         console.log('conn: ', conn)
 
-        let  queryString;
+        let queryString;
+        let queryValue;
+
         (!req.body.polyclinic || req.body.polyclinic === '') ? 
-        queryString = queryPool.queryMedicalRecordDateRange(req.body): queryString = queryPool.queryMedicalRecordDateRangePolyclinic(req.body)
+        queryString = queryPool.queryMedicalRecordDateRange: 
+        queryString = queryPool.queryMedicalRecordDateRangePolyclinic
+
+        (!req.body.polyclinic || req.body.polyclinic === '') ? 
+        queryValue = queryPool.queryMedicalRecordDateRangeValue([arrValueMedicalRecordDataRange]) :
+        queryValue = queryPool.queryMedicalRecordDateRangePolyclinicValue([arrValueMedicalRecordDataRangePolyclinic])
 
         let getDateRangePolyclinic,getDateRangePolyclinicErr;
-        [getDateRangePolyclinic, getDateRangePolyclinicErr] = await to(conn.query(queryString))
+        [getDateRangePolyclinic, getDateRangePolyclinicErr] = await to(
+            conn.query(
+                queryString, 
+                queryValue
+                )
+            )
         if (getDateRangePolyclinicErr) throw getDateRangePolyclinicErr
  
         let arrPolycinic = new Array()
