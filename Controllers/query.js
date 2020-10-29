@@ -96,7 +96,7 @@ exports.updateDoctor = `UPDATE doctor
         datecertification = $16,
         countpatientnumber = $17,
     WHERE
-        doctor_id = $18'`
+        doctor_id = $18`
 
 exports.updateDoctorValue = (param,id)=>{
     let arrayUpdateDoctor = [

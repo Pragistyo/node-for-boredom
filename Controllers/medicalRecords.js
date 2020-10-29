@@ -4,6 +4,7 @@ import chalk from 'chalk'
 import to from '../Helper/to'
 import queryPool from './query'
 
+
 exports.getAll = async (req, res)=>{
     const pool = new Pool(dbConfig)
     const queryString = 'select * from medicalrecord ORDER BY medicalrecord_id ASC';
@@ -154,28 +155,34 @@ exports.remove = async(req,res)=>{
 
 
 exports.getDateRangePolyclinic = async(req,res) =>{
+    // let objValueMedicalRecordDataRange ={dateFrom:req.body.dateFrom, dateTo:req.body.dateTo}
+    // let objValueMedicalRecordDataRangePolyclinic = {polyclinic: req.body.polyclinic, dateFrom: req.body.dateFrom, dateTo:req.body.dateTo}
     let arrValueMedicalRecordDataRange =[req.body.dateFrom, req.body.dateTo]
-    let arrValueMedicalRecordDataRangePolyclinic = [req.body.polyclinic, req.body.dateFrom, req.body.dateTo] 
+    let arrValueMedicalRecordDataRangePolyclinic = [req.body.polyclinic, req.body.dateFrom, req.body.dateTo]
     const pool = new Pool(dbConfig)
     // const queryString = `delete from doctor where medicalrecord_id = ${req.params.id}`;
     let conn;
-
+    console.log("ini req.body: ", req.body)
     try{
         let connErr;
         [conn, connErr] = await to(pool.connect())
         if(connErr) throw connErr
-        console.log('conn: ', conn)
-
+        // console.log('conn: ', conn)
+        console.log(arrValueMedicalRecordDataRangePolyclinic)
         let queryString;
         let queryValue;
 
-        (!req.body.polyclinic || req.body.polyclinic === '') ? 
-        queryString = queryPool.queryMedicalRecordDateRange: 
-        queryString = queryPool.queryMedicalRecordDateRangePolyclinic
+        if (!req.body.polyclinic || req.body.polyclinic === ""){
+            queryString = queryPool.queryMedicalRecordDateRange
+            queryValue = queryPool.queryMedicalRecordDateRangeValue(req.body) 
+        } else{
+            queryString = queryPool.queryMedicalRecordDateRangePolyclinic
+            queryValue = queryPool.queryMedicalRecordDateRangePolyclinicValue(req.body) 
+        }
 
-        (!req.body.polyclinic || req.body.polyclinic === '') ? 
-        queryValue = queryPool.queryMedicalRecordDateRangeValue([arrValueMedicalRecordDataRange]) :
-        queryValue = queryPool.queryMedicalRecordDateRangePolyclinicValue([arrValueMedicalRecordDataRangePolyclinic])
+        console.log('queryString: ', queryString)
+        console.log('=============================================')
+        console.log('queryValue: ', arrValueMedicalRecordDataRangePolyclinic)
 
         let getDateRangePolyclinic,getDateRangePolyclinicErr;
         [getDateRangePolyclinic, getDateRangePolyclinicErr] = await to(
