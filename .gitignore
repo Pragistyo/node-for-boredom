@@ -1,7 +1,8 @@
 #dependencies
-node_modules
+node_modules/
 
 # misc  
 .env
 s.txt
 .nyc_output
+coverage/
