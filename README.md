@@ -1,6 +1,6 @@
-# node-for-boredom (Not-shiny-octo-couscus)
+# Hospital mini-data-management
 
-## This project name to avoid github suggested name "shiny-octo-couscus".
+## This project about mini hospital data management REST API.
 
 This project is about API implementation of mini hospital application.  
 There are three subjects on this project: Doctor, Patients, medical records.  
