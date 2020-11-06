@@ -1,3 +1,4 @@
+"use strict"
 import dbConfig from '../dbConfig'
 import {Pool, Client} from'pg'
 import chalk from 'chalk'
@@ -155,10 +156,6 @@ exports.remove = async(req,res)=>{
 
 
 exports.getDateRangePolyclinic = async(req,res) =>{
-    // let objValueMedicalRecordDataRange ={dateFrom:req.body.dateFrom, dateTo:req.body.dateTo}
-    // let objValueMedicalRecordDataRangePolyclinic = {polyclinic: req.body.polyclinic, dateFrom: req.body.dateFrom, dateTo:req.body.dateTo}
-    let arrValueMedicalRecordDataRange =[req.body.dateFrom, req.body.dateTo]
-    let arrValueMedicalRecordDataRangePolyclinic = [req.body.polyclinic, req.body.dateFrom, req.body.dateTo]
     const pool = new Pool(dbConfig)
     // const queryString = `delete from doctor where medicalrecord_id = ${req.params.id}`;
     let conn;
@@ -167,8 +164,7 @@ exports.getDateRangePolyclinic = async(req,res) =>{
         let connErr;
         [conn, connErr] = await to(pool.connect())
         if(connErr) throw connErr
-        // console.log('conn: ', conn)
-        console.log(arrValueMedicalRecordDataRangePolyclinic)
+        console.log('conn: ', conn)
         let queryString;
         let queryValue;
 
@@ -179,10 +175,6 @@ exports.getDateRangePolyclinic = async(req,res) =>{
             queryString = queryPool.queryMedicalRecordDateRangePolyclinic
             queryValue = queryPool.queryMedicalRecordDateRangePolyclinicValue(req.body) 
         }
-
-        console.log('queryString: ', queryString)
-        console.log('=============================================')
-        console.log('queryValue: ', arrValueMedicalRecordDataRangePolyclinic)
 
         let getDateRangePolyclinic,getDateRangePolyclinicErr;
         [getDateRangePolyclinic, getDateRangePolyclinicErr] = await to(
@@ -221,3 +213,11 @@ exports.getDateRangePolyclinic = async(req,res) =>{
     }
 }
 
+
+
+let obj  = {
+    "dateFrom": '2018-01-01',
+    "dateTo" : '2020-01-01',
+    "polyclinic" : "GI"
+
+}

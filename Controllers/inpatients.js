@@ -1,4 +1,4 @@
-console.log('controllers inpatients')
+"use strict"
 import dbConfig from '../dbConfig'
 import {Pool, Client} from'pg'
 import chalk from 'chalk'
@@ -123,7 +123,7 @@ exports.getId = async(req,res)=>{
                 queryString, [req.params.id]
                 )
             )
-        console.log(singleInpatient)
+        // console.log(singleInpatient)
         if(singleInpatientErr) throw singleInpatientErr
 
         if (singleInpatient.rows.length === 0 ) return res.status(404).json({msg: 'data not found'})
