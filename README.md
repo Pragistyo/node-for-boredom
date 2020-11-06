@@ -8,8 +8,8 @@ This project build by nodeJS + PostgrestSQL
 
 ## STACK
 
-Language: nodeJs ES6 (with babel).
-Server: express.
+Language: nodeJs ES6 (with babel). \
+Server: express. \
 Test: mocha, chai, istanbul (for coverage)
 
 ## Feature:
