@@ -12,10 +12,13 @@ Medical_Records
 - When Delete Medical Records, decrease "countpatientnumber field in doctor table, for related doctor
 - getByDatePolyclinic: input the range dateFrom and dateTo, to get data count all patient which consult at those date. Furthermore, count patient based on their blood type
 
+
 ##STACK
-Language: nodeJs ES6 (with babel)
-Server: express
+
+Language: nodeJs ES6 (with babel).
+Server: express.
 Test: mocha, chai, istanbul (for coverage)
+
 
 ## ROUTES
 
