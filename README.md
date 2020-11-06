@@ -6,7 +6,7 @@ This project is about API implementation of mini hospital application.
 There are three subjects on this project: Doctor, Patients, medical records.  
 This project build by nodeJS + PostgrestSQL
 
-##STACK
+<!-- ##STACK
 
 Language: nodeJs ES6 (with babel).
 Server: express.
@@ -17,7 +17,7 @@ Test: mocha, chai, istanbul (for coverage)
 Medical_Records
 - When Create Medical Records, increase "countpatientnumber" field in doctor table, for related doctor
 - When Delete Medical Records, decrease "countpatientnumber field in doctor table, for related doctor
-- getByDatePolyclinic: input the range dateFrom and dateTo, to get data count all patient which consult at those date. Furthermore, count patient based on their blood type
+- getByDatePolyclinic: input the range dateFrom and dateTo, to get data count all patient which consult at those date. Furthermore, count patient based on their blood type -->
 
 
 
