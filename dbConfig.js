@@ -8,7 +8,7 @@ require('dotenv').config()
 //     port:process.env.DB_PORT, 
 // };
 
-const config = {
+exports.config = {
     user: process.env.USER_LOCAL, 
     database: process.env.DATABASE_LOCAL, 
     password: process.env.PASSWORD_LOCAL, 
@@ -17,5 +17,8 @@ const config = {
     port:process.env.DB_PORT_LOCAL, 
 };
 
-module.exports = config
+exports.configMongo ={
+    uri:process.env.MONGO_URI
+}
+
 

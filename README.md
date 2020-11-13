@@ -10,7 +10,7 @@ This project build by nodeJS + PostgrestSQL
 
 Language: nodeJs ES6 (with babel). \
 Server: express. \
-Database: PostgreSQL (with node-postgres)\
+Database: PostgreSQL (with node-postgres), MongoDB (with mongoose)\
 Test: mocha, chai, istanbul (for coverage)
 
 ## Feature:
