@@ -8,7 +8,6 @@ import chalk from 'chalk'
 exports.getAll = async ( req,res )=> {
     try {
         let [Users, UsersErr]= await to( User.find( {}, {password:0}).lean().exec() )
-        
         if (UsersErr) throw UsersErr
 
         return res.status(200).json({message:'success_retrieve_user', data: Users})
@@ -95,36 +94,29 @@ exports.removeUser = async (req, res) => {
 exports.login = async(req, res) =>{
     console.log(`\n ===== USER LOGIN ==== \n`);
     try {
-        // monggose modes.method().lean() 
-        // lean() size about 1x smaller than without lean()
+        // monggose model.method().lean() 
+        // lean() size about 10x smaller than without lean()
         // downside: check the doc
         let [userLogin, userLoginErr] = await to( User.findOne ({username:req.body.username}).lean().exec() )
         if (userLoginErr) throw userLoginErr
 
         let [passwordTrue, passwordErr] = await to ( bcrypt.compare(req.body.password, userLogin.password) )
         if (passwordErr) {
-            return res.status(400).json({
-                message: 'wrong password'
-            })
+            return res.status(400).json({message: 'wrong password'})
 
         } else if(passwordTrue){
-            let token = sign({
+            let tokenData = {
                 id       : userLogin._id,
                 username : userLogin.username,
                 email    : userLogin.email,
                 role     : userLogin.role
-            }, process.env.SECRET_KEY)
-            return res.status(200).json({
-                message:'login success',
-                token: token
-            })
+            }
+
+            let token = sign(tokenData, process.env.SECRET_KEY)
+            return res.status(200).json({ message:'login success', token: token })
         }
     } catch (error) {
-        console.log(
-            chalk.red(`\n ===== THERE IS ERROR LOGIN ==== \n `, error)
-        )        
-        return res.status(404).json({
-            message: error.toString(),
-        })
+        console.log( chalk.red(`\n ===== THERE IS ERROR LOGIN ==== \n `, error) )        
+        return res.status(404).json( { message:"error login", error: error.toString()} )
     }
 }
