@@ -1,35 +1,25 @@
 import  {verify } from 'jsonwebtoken'
+import chalk from 'chalk'
+import to from '../Helper/to'
 // require('dotenv').config()
 
 exports.isLogin = async (req , res, next ) => {
     try {
         console.log("\n ===== trying to verify if the user IS login ==== \n");
-        let [verified, verifiedErr] =  await to ( verify( req.headers.token, process.env.SECRET_KEY))
-        if (verifiedErr) throw new Error (verifiedErr)
-
-        req.role = verified.role
+        let isVerified = await verify(req.headers.token, process.env.SECRET_KEY)
+        req.role = isVerified.role
+        console.log(`==== user verified ====`);
         return next()
         
     } catch (error) {
-        console.log(chalk.red( `Error occured: ${error}`))
-        return res.status(400).json({
-            status: 400,
-            message:'Error user verification'
+        console.log(chalk.red( `Error isLogin occured: ${error}`))
+        return res.status(401).json({
+            status: 401,
+            message:`Error user verification: ${error.toString()}`
         })
     }
 }
-//   function isLogin(req,res,next){
-//     console.log('ISLOGIN ==============')
-//     jwt.verify(req.headers.token, process.env.SECRET_KEY,(err,decoded)=>{
-//       if(!err){
-//         req.role = decoded.role
-//         next()
-//       }
-//       else{
-//         res.send(err)
-//       }
-//     })
-//   }
+
 exports.isAdmin = (req, res, next) =>{
     console.log(`\n ===== checking if USER is ADMIN ==== \n`);
     if(req.role === 'admin') return next()
@@ -48,10 +38,10 @@ exports.isDoctor = (req,res,next) =>{
     })
 }
 
-exports.isSuperUser = (req,res, next =>{
+exports.isSuperUser = (req,res, next) =>{
     if(req.role === 'super_user') return next()
     return res.status(401).json({
         status:401,
         message:' User DOES NOT have SUPER_USER authority '
     })
-})
+}

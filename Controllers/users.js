@@ -7,7 +7,7 @@ import chalk from 'chalk'
 
 exports.getAll = async ( req,res )=> {
     try {
-        let [Users, UsersErr]= await to( User.find( {}, {password:0}).exec() )
+        let [Users, UsersErr]= await to( User.find( {}, {password:0}).lean().exec() )
         
         if (UsersErr) throw UsersErr
 
@@ -44,7 +44,7 @@ exports.addUser = async (req,res) => {
         if (hashErr) throw hashErr
         req.body.password = hash
 
-        let [newUser, newUserErr] = await to ( User.create( req.body).exec() )
+        let [newUser, newUserErr] = await to ( User.create( req.body) )
         if (newUserErr) throw newUserErr
 
         return res.status(201).json({message:'successfully created', data: newUser})
@@ -67,11 +67,12 @@ exports.updateUser = async (req, res) => {
 
         let condition = {_id:req.params.id}
         let updatedUser = req.body
+        let updateOption = {useFindAndModify:false}
 
-        let [newUser, newUserErr] = await to ( User.findOneAndUpdate( condition, updatedUser).exec() )
+        let [newUser, newUserErr] = await to ( User.findOneAndUpdate( condition, {$set:updatedUser}, updateOption).exec() )
         if (newUserErr) throw newUserErr
-
-        return res.status(204).json({message:'successfully updated', data: newUser})
+        
+        return res.status(200).json({message:'successfully updated', data: newUser})
     } catch (error) {
         console.log( chalk.red ( `\n ==== Error Update User : ${error} ==== \n`));
         return res.status(400).json({message: 'Error update User', error:error.toString()})
