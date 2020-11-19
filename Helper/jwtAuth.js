@@ -3,11 +3,11 @@ import chalk from 'chalk'
 import to from '../Helper/to'
 // require('dotenv').config()
 
-exports.isLogin = async (req , res, next ) => {
+exports.verified = async (req , res, next ) => {
     try {
         console.log("\n ===== trying to verify if the user IS login ==== \n");
         let isVerified = await verify(req.headers.token, process.env.SECRET_KEY)
-        req.role = isVerified.role
+        req.verified = isVerified
         console.log(`==== user verified ====`);
         return next()
         
@@ -22,7 +22,7 @@ exports.isLogin = async (req , res, next ) => {
 
 exports.isAdmin = (req, res, next) =>{
     console.log(`\n ===== checking if USER is ADMIN ==== \n`);
-    if(req.role === 'admin') return next()
+    if(req.verified.role === 'admin') return next()
     return res.status(401).json({
         status:401,
         message:' User NOT an ADMIN'
@@ -31,7 +31,7 @@ exports.isAdmin = (req, res, next) =>{
 
 exports.isDoctor = (req,res,next) =>{
     console.log(`\n ===== checking if USER is DOCTOR ==== \n`);
-    if(req.role === 'admin') return next()
+    if(req.verified.role === 'admin') return next()
     return res.status(401).json({
         status:401,
         message:' User NOT a DOCTOR'
@@ -39,7 +39,7 @@ exports.isDoctor = (req,res,next) =>{
 }
 
 exports.isSuperUser = (req,res, next) =>{
-    if(req.role === 'super_user') return next()
+    if(req.verified.role === 'super_user') return next()
     return res.status(401).json({
         status:401,
         message:' User DOES NOT have SUPER_USER authority '

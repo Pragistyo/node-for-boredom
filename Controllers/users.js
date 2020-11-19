@@ -3,6 +3,7 @@ import bcrypt, { genSalt } from 'bcrypt'
 import { sign } from 'jsonwebtoken'
 import to from '../Helper/to'
 import chalk from 'chalk'
+// import { verifed } from '../Helper/jwtAuth'
 
 
 exports.getAll = async ( req,res )=> {
@@ -117,6 +118,20 @@ exports.login = async(req, res) =>{
         }
     } catch (error) {
         console.log( chalk.red(`\n ===== THERE IS ERROR LOGIN ==== \n `, error) )        
-        return res.status(404).json( { message:"error login", error: error.toString()} )
+        return res.status(404).json({ message:"error login", error: error.toString()} )
     }
+}
+
+exports.isLogin =  async (req, res ) => {
+    
+    try{
+        if (!req.verified) throw new Error ("Token not verified")
+
+        return res.status(200).json( { message: "user verified  ", userData: req.verified } )
+    } catch (e) {
+        console.log( chalk.red ('Error Get User Login Data: ', e) );
+        return res.status(401).json({ message: "Credential not valid, try login again", error: e.toString() } )
+    }
+
+
 }

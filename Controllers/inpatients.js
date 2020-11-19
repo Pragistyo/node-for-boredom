@@ -1,5 +1,5 @@
 "use strict"
-import dbConfig from '../dbConfig'
+import {dbConfig} from '../dbConfig'
 import {Pool, Client} from'pg'
 import chalk from 'chalk'
 import to from '../Helper/to'

@@ -1,5 +1,5 @@
 "use strict"
-import dbConfig from '../dbConfig'
+import  {dbConfig} from '../dbConfig'
 import {Pool, Client} from'pg'
 import chalk from 'chalk'
 import to from '../Helper/to'
@@ -13,8 +13,8 @@ exports.getAll = async (req, res)=>{
     try{
         let connErr;
         [conn, connErr] = await to(pool.connect())
-        if(connErr)  throw new Error("Error Connection Pool doctor getAll")
-        // console.log('=======================: ', conn)
+        console.log('=======================: ', connErr)
+        if(connErr)  throw new Error(`Error Connection Pool doctor getAll: ${connErr.toString}` )
         
         let [resultAllDoctors, resultAllDoctorsErr] = await to(
             conn.query(
@@ -37,8 +37,6 @@ exports.getAll = async (req, res)=>{
         }catch(e){ console.log('Error close conn: ',e) }
     }
 };
-
-
 
 
 exports.create = async (req,res)=>{

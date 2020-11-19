@@ -1,5 +1,5 @@
 const {Pool} = require('pg');
-const dbConfig = require('./dbConfig')
+const {dbConfig} = require('./dbConfig')
 const to = require('./Helper/to')
 const chalk = require('chalk')
 

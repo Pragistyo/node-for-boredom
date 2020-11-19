@@ -1,7 +1,7 @@
 const {Pool, Client} = require('pg')
 const chalk = require('chalk')
 const to = require('./Helper/to')
-const dbConfig = require ('./dbConfig')
+const {dbConfig} = require ('./dbConfig')
 
 // console.log('DBconfig: ', dbConfig)
 const pool = new Pool(dbConfig);

@@ -8,7 +8,7 @@ require('dotenv').config()
 //     port:process.env.DB_PORT, 
 // };
 
-exports.config = {
+exports.dbConfig = {
     user: process.env.USER_LOCAL, 
     database: process.env.DATABASE_LOCAL, 
     password: process.env.PASSWORD_LOCAL, 

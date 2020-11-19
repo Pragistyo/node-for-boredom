@@ -6,7 +6,7 @@ const should = chai.should()
 
 chai.use(chaiHttp)
 
-describe(`ENDPOINT: '/provisions/api/v1/doctors' ` ,() =>{
+describe(`ENDPOINT: '/provisions/api/v1/inpatients' ` ,() =>{
   describe('Return Array All Inpatient', () =>{
     it('should return all inpatient data', async () => {
         // await Promise.resolve()
@@ -19,7 +19,7 @@ describe(`ENDPOINT: '/provisions/api/v1/doctors' ` ,() =>{
   });
 });
 
-describe(`ENDPOINT: '/provisions/api/v1/doctors/:inpatient_id' `,() =>{
+describe(`ENDPOINT: '/provisions/api/v1/inpatients/:inpatient_id' `,() =>{
     describe('Return Inpatient with id 6', () =>{
       it('should return inpatient_id = 6 inpatient data', async () => {
           // await Promise.resolve()
